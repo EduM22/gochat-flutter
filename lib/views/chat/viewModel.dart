@@ -1,9 +1,9 @@
+import 'package:get/get.dart';
 import 'package:gochat/services/chatService.dart';
+import 'package:gochat/views/login/login.dart';
 import 'package:stacked/stacked.dart';
 
 class ChatViewModel extends BaseViewModel {
-  String title = 'default';
-
   ChatService _service = ChatService();
   List<String> _messages = [];
 
@@ -14,6 +14,9 @@ class ChatViewModel extends BaseViewModel {
       print(event);
       this._messages.add(event);
       notifyListeners();
+    }, cancelOnError: true).onError((error) {
+      print('error: $error');
+      Get.offAll(() => LoginView());
     });
   }
 
