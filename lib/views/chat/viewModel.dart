@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:get/get.dart';
 import 'package:gochat/services/chatService.dart';
 import 'package:gochat/views/login/login.dart';

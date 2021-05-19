@@ -26,10 +26,23 @@ class LoginView extends StatelessWidget {
                     children: [
                       TextFormField(
                         decoration: InputDecoration(labelText: 'email'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 10,),
                       TextFormField(
                         decoration: InputDecoration(labelText: 'password'),
+                        obscureText: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 10,),
                       ElevatedButton(

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:gochat/views/chat/chat.dart';
+import 'package:gochat/views/nav/nav.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class LoginViewModel extends BaseViewModel {
   void validateForm() {
     if (this._formKey.currentState!.validate()) {
       print('valid form');
-      Get.offAll(() => ChatView());
+      Get.offAll(() => NavView());
     } else {
       print('not valid');
     }
