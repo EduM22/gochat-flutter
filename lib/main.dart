@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gochat/views/chat/chat.dart';
+import 'package:gochat/views/login/login.dart';
+
 
 void main() {
   runApp(GoChat());
@@ -15,7 +17,7 @@ class GoChat extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChatView(),
+      home: LoginView(),
     );
   }
 }
