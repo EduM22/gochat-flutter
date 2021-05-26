@@ -22,13 +22,10 @@ class ChatView extends StatelessWidget {
                   }
                 )
               ),
-              Spacer(),
               Container(
                 child: SizedBox(
                   height: 50,
-                  child: Row(
-                    children: [
-                      Form(
+                  child: Form(
                         key: viewModel.formKey,
                         child: TextFormField(
                           decoration: InputDecoration(labelText: 'message'),
@@ -39,9 +36,6 @@ class ChatView extends StatelessWidget {
                             return null;
                           },
                         ),
-                      ),
-                      IconButton(onPressed: () => viewModel.validateForm(), icon: Icon(Icons.search))  
-                    ]
                   ),
                 ),
               )
