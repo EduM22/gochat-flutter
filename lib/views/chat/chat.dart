@@ -11,7 +11,8 @@ class ChatView extends StatelessWidget {
       viewModelBuilder: () => ChatViewModel(),
       onModelReady: (viewModel) => viewModel.initialise(),
       builder: (context, viewModel, child) => Scaffold(
-          body: Column(
+        body: Container(
+          child: Column(
             children: [
               Expanded(
                 child: ListView.builder(
@@ -20,9 +21,34 @@ class ChatView extends StatelessWidget {
                     return Text(viewModel.messages[index]);
                   }
                 )
+              ),
+              Spacer(),
+              Container(
+                child: SizedBox(
+                  height: 50,
+                  child: Row(
+                    children: [
+                      Form(
+                        key: viewModel.formKey,
+                        child: TextFormField(
+                          decoration: InputDecoration(labelText: 'message'),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      IconButton(onPressed: () => viewModel.validateForm(), icon: Icon(Icons.search))  
+                    ]
+                  ),
+                ),
               )
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

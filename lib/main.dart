@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gochat/views/chat/chat.dart';
+import 'package:get_it/get_it.dart';
+import 'package:gochat/services/chatService.dart';
 import 'package:gochat/views/login/login.dart';
 
-
 void main() {
+  GetIt.I.registerSingleton<ChatService>(ChatService());
   runApp(GoChat());
 }
 

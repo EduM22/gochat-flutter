@@ -10,6 +10,8 @@ class NavView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<NavViewModel>.reactive(
+      createNewModelOnInsert: false,
+      onModelReady: (viewModel) => viewModel.init(),
       builder: (context, model, child) => Scaffold(
         body: getViewForIndex(model.currentIndex),
         bottomNavigationBar: BottomNavigationBar(
