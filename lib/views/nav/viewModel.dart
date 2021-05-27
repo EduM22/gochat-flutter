@@ -8,6 +8,7 @@ class NavViewModel extends IndexTrackingViewModel {
   void init() {
     _service.setupChannel();
     _service.stream.listen((event) {
+      _service.add(event);
       print("msg: $event");
     });
   }

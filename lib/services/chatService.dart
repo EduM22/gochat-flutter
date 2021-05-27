@@ -8,6 +8,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class ChatService {
   late WebSocketChannel _channel;
   StreamController _streamController = StreamController<dynamic>.broadcast();
+  List<String> _messages = [];
 
   void setupChannel({String? url}) {
     if (kIsWeb) {
@@ -20,7 +21,12 @@ class ChatService {
     _streamController.addStream(this._channel.stream);
   }
 
+  List<String> get messages => this._messages;
   Stream get stream => this._streamController.stream;
+
+  void add(String msg) {
+    this._messages.add(msg);
+  }
 
   void send(String msg) {
     this._channel.sink.add(msg);

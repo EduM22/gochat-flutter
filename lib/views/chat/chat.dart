@@ -9,7 +9,7 @@ class ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ChatViewModel>.reactive(
       viewModelBuilder: () => ChatViewModel(),
-      onModelReady: (viewModel) => viewModel.initialise(),
+      onModelReady: (viewModel) => viewModel.init(),
       builder: (context, viewModel, child) => Scaffold(
         body: Container(
           child: Column(
@@ -22,12 +22,19 @@ class ChatView extends StatelessWidget {
                   }
                 )
               ),
-              Container(
-                child: SizedBox(
-                  height: 50,
-                  child: Form(
+              Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width / 5,
+                  right: MediaQuery.of(context).size.width / 5,
+                  bottom: 20
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Form(
                         key: viewModel.formKey,
                         child: TextFormField(
+                          controller: viewModel.messageController,
                           decoration: InputDecoration(labelText: 'message'),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -36,8 +43,17 @@ class ChatView extends StatelessWidget {
                             return null;
                           },
                         ),
-                  ),
-                ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 70,
+                      child: IconButton(
+                        onPressed: () => viewModel.validateForm(),
+                        icon: Icon(Icons.send)
+                      ),
+                    ),
+                  ],
+                ) 
               )
             ],
           ),

@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gochat/services/chatService.dart';
-import 'package:gochat/views/login/login.dart';
 import 'package:stacked/stacked.dart';
 
 class ChatViewModel extends BaseViewModel {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   ChatService _service = GetIt.I.get<ChatService>();
-  List<String> _messages = [];
+  TextEditingController _messageController = TextEditingController();
 
   GlobalKey get formKey => _formKey;
+  TextEditingController get messageController => _messageController;
 
-  void initialise() {
+  void init() {
     _service.stream.listen((event) {
-      this._messages.add(event);
       notifyListeners();
-    }, cancelOnError: true).onError((error) {
-      print('error: $error');
-      Get.offAll(() => LoginView());
     });
   }
 
-  List<String> get messages => this._messages.reversed.toList();
+  List<String> get messages => this._service.messages;
 
   void validateForm() {
     if (this._formKey.currentState!.validate()) {
-      print('valid form');
+      this._service.send(this._messageController.text);
+      this._messageController.clear();
     } else {
       print('not valid');
     }
